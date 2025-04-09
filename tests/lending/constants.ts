@@ -4,10 +4,10 @@ export const PYTH_SOLANA_RECEIVER_PROGRAM_ID = new PublicKey(
   "rec5EKMGg6MxZYaMdyBfgwp4d5rB9T1VQH5pJv5LtFJ"
 );
 export const SOL_USD_PRICE_FEED_PDA = new PublicKey(
-  "7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE"
+  // TODO: SOL/USD price feed account address
 );
 export const USDC_USD_PRICE_FEED_PDA = new PublicKey(
-  "Dpw1EAVrSB1ibxiDQyTAW6Zip3J4Btk2x4SgApQCeFbX"
+  // TODO: USDC/USD price feed account address
 );
 export const SOL_USD_PRICE_FEED_ID =
   "0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d";

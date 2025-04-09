@@ -64,8 +64,7 @@ export async function getBankrunSetup(accounts: AddedAccount[] = []) {
   });
 
   await setPriceFeedAccs(context, [
-    SOL_USD_PRICE_FEED_PDA,
-    USDC_USD_PRICE_FEED_PDA,
+    // TODO: add price feed account addresses
   ]);
 
   return {

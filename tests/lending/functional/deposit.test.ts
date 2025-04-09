@@ -80,22 +80,7 @@ describe("deposit", () => {
       userUsdcAtaData
     );
 
-    AccountLayout.encode(
-      {
-        amount: BigInt(initUserSolAtaBal),
-        closeAuthority: PublicKey.default,
-        closeAuthorityOption: 0,
-        delegate: PublicKey.default,
-        delegateOption: 0,
-        delegatedAmount: 0n,
-        isNative: 1n,
-        isNativeOption: 1,
-        mint: NATIVE_MINT,
-        owner: userA.publicKey,
-        state: 1,
-      },
-      userSolAtaData
-    );
+    // TODO: encode userSolAtaData
 
     ({ context, provider, program } = await getBankrunSetup([
       ...[bankUsdc, bankSol, userA].map((kp) => {
@@ -118,15 +103,7 @@ describe("deposit", () => {
           executable: false,
         },
       },
-      {
-        address: userSolAtaPda,
-        info: {
-          lamports: initUserSolAtaBal,
-          data: userSolAtaData,
-          owner: tokenProgram,
-          executable: false,
-        },
-      },
+      // TODO: pre-load userSolAta
     ]));
 
     const liquidationThreshold = 9000; // 90% in basis points
