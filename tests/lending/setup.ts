@@ -124,7 +124,7 @@ export async function setPriceFeedAccs(
   });
 }
 
-export async function forwardTime(context: ProgramTestContext, sec: number) {
+export async function forwardTime(context: ProgramTestContext, timestamp: number) {
   const clock = await context.banksClient.getClock();
   context.setClock(
     new Clock(
@@ -132,7 +132,7 @@ export async function forwardTime(context: ProgramTestContext, sec: number) {
       clock.epochStartTimestamp,
       clock.epoch,
       clock.leaderScheduleEpoch,
-      clock.unixTimestamp + BigInt(sec)
+      clock.unixTimestamp + BigInt(timestamp)
     )
   );
 }
