@@ -55,14 +55,5 @@ export async function getBankrunSetup(accounts: AddedAccount[] = []) {
 }
 
 export async function forwardTime(context: ProgramTestContext, timestamp: number) {
-  const clock = await context.banksClient.getClock();
-  context.setClock(
-    new Clock(
-      clock.slot,
-      clock.epochStartTimestamp,
-      clock.epoch,
-      clock.leaderScheduleEpoch,
-      clock.unixTimestamp + BigInt(timestamp)
-    )
-  );
+  // TODO: set clock with new timestamp
 }

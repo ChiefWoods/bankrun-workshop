@@ -116,7 +116,7 @@ describe("claimTokens", () => {
       lamports: LAMPORTS_PER_SOL,
     });
 
-    await forwardTime(context, endTime.toNumber() + 1);
+    // TODO: time travel ahead
 
     await program.methods
       .claimTokens()
