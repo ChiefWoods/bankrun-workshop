@@ -13,48 +13,19 @@ import {
   mintAtaAddress,
 } from "./constants";
 
-const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+// TODO: create mainnet connection instance
 
-const [mintInfo, collectionInfo, masterEditionInfo, metadataInfo, mintAtaInfo] =
-  await connection.getMultipleAccountsInfo([
-    mintAddress,
-    collectionAddress,
-    masterEditionAddress,
-    metadataAddress,
-    mintAtaAddress,
-  ]);
+// TODO: fetch mainnet accounts: mintAddress, collectionAddress, masterEditionAddress, metadataAddress, mintAtaAddress
 
 export async function getBankrunSetup(accounts: AddedAccount[] = []) {
   const context = await startAnchor(
     "",
     [
-      {
-        name: "mpl_token_metadata",
-        programId: new PublicKey(MPL_TOKEN_METADATA_PROGRAM_ID),
-      },
+      // TODO: pre-deploy Token Metadata program
     ],
     [
       ...accounts,
-      {
-        address: mintAddress,
-        info: mintInfo,
-      },
-      {
-        address: collectionAddress,
-        info: collectionInfo,
-      },
-      {
-        address: masterEditionAddress,
-        info: masterEditionInfo,
-      },
-      {
-        address: metadataAddress,
-        info: metadataInfo,
-      },
-      {
-        address: mintAtaAddress,
-        info: mintAtaInfo,
-      },
+      // TODO: pre-load fetched accounts
     ]
   );
   const provider = new BankrunProvider(context);
