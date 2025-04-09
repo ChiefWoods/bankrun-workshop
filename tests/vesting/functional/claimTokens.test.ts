@@ -2,8 +2,8 @@ import { AnchorError, BN, Program } from "@coral-xyz/anchor";
 import { BankrunProvider } from "anchor-bankrun";
 import { Vesting } from "../../../target/types/vesting";
 import { beforeEach, describe, expect, test } from "bun:test";
-import { Clock, ProgramTestContext } from "solana-bankrun";
-import { getBankrunSetup } from "../setup";
+import { ProgramTestContext } from "solana-bankrun";
+import { forwardTime, getBankrunSetup } from "../setup";
 import {
   Keypair,
   LAMPORTS_PER_SOL,
@@ -68,13 +68,7 @@ describe("claimTokens", () => {
   });
 
   test("claim tokens after end time", async () => {
-    let {
-      epoch,
-      epochStartTimestamp,
-      leaderScheduleEpoch,
-      slot,
-      unixTimestamp,
-    } = await context.banksClient.getClock();
+    let { unixTimestamp } = await context.banksClient.getClock();
 
     const startTime = new BN(Number(unixTimestamp));
     const endTime = new BN(Number(unixTimestamp) + 100);
@@ -122,15 +116,7 @@ describe("claimTokens", () => {
       lamports: LAMPORTS_PER_SOL,
     });
 
-    context.setClock(
-      new Clock(
-        slot,
-        epochStartTimestamp,
-        epoch,
-        leaderScheduleEpoch,
-        unixTimestamp + BigInt(endTime.toNumber() + 1)
-      )
-    );
+    await forwardTime(context, endTime.toNumber() + 1);
 
     await program.methods
       .claimTokens()
@@ -225,15 +211,7 @@ describe("claimTokens", () => {
         Number(unixTimestamp) +
         (cliffTime.toNumber() - Number(unixTimestamp))) /
       2;
-    context.setClock(
-      new Clock(
-        slot,
-        epochStartTimestamp,
-        epoch,
-        leaderScheduleEpoch,
-        unixTimestamp + BigInt(timeToJump)
-      )
-    );
+    await forwardTime(context, timeToJump);
 
     await program.methods
       .claimTokens()
@@ -327,15 +305,7 @@ describe("claimTokens", () => {
     });
 
     const timeToJump = cliffTime.toNumber() - 1;
-    context.setClock(
-      new Clock(
-        slot,
-        epochStartTimestamp,
-        epoch,
-        leaderScheduleEpoch,
-        unixTimestamp + BigInt(timeToJump)
-      )
-    );
+    await forwardTime(context, timeToJump);
 
     try {
       await program.methods
@@ -412,15 +382,7 @@ describe("claimTokens", () => {
       lamports: LAMPORTS_PER_SOL,
     });
 
-    context.setClock(
-      new Clock(
-        slot,
-        epochStartTimestamp,
-        epoch,
-        leaderScheduleEpoch,
-        unixTimestamp + BigInt(endTime.toNumber() + 1)
-      )
-    );
+    await forwardTime(context, endTime.toNumber() + 1);
 
     await program.methods
       .claimTokens()

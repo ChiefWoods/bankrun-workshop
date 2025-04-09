@@ -1,6 +1,6 @@
 import { Program } from "@coral-xyz/anchor";
 import { BankrunProvider } from "anchor-bankrun";
-import { AddedAccount, startAnchor } from "solana-bankrun";
+import { AddedAccount, Clock, ProgramTestContext, startAnchor } from "solana-bankrun";
 import { Vesting } from "../../target/types/vesting";
 import idl from "../../target/idl/vesting.json";
 import {
@@ -52,4 +52,17 @@ export async function getBankrunSetup(accounts: AddedAccount[] = []) {
     provider,
     program,
   };
+}
+
+export async function forwardTime(context: ProgramTestContext, timestamp: number) {
+  const clock = await context.banksClient.getClock();
+  context.setClock(
+    new Clock(
+      clock.slot,
+      clock.epochStartTimestamp,
+      clock.epoch,
+      clock.leaderScheduleEpoch,
+      clock.unixTimestamp + BigInt(timestamp)
+    )
+  );
 }
