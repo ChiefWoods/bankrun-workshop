@@ -6,5 +6,5 @@ export async function getEscrowAcc(
   program: Program<Escrow>,
   escrowPda: PublicKey
 ) {
-  return await program.account.escrow.fetchNullable(escrowPda);
+  // TODO: fetch Escrow account
 }
