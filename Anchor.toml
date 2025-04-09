@@ -7,13 +7,16 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-demo = "8Y8jZn8oxzYNh85tnqE5WY9DoC8y4PZQcuiPr1n7wvM4"
+escrow = "Fm6KJkjxqrNii925STf4852ZvsZMim9D1foRYzbtTwXA"
+lending = "HcuLs3jD821V7i1mpwYVppGoipnMXgxTBgmQntxXBisG"
+marketplace = "CsivZznu552xRoPY1jD9xZF3oFdiAQx9e4Yue1cXaYWu"
+vesting = "A8CCJxHV1hZLMUSG6Hx8QbLwjSgiefNWVu5gYc74Nn7E"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
